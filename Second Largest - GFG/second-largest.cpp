@@ -11,23 +11,23 @@ public:
 	// largest elements
 	int print2largest(int arr[], int n) {
 	    // code here
-	    int large = 0;
-	    int Slargest = -1;
+	    int large = arr[0];
+	    int Slarge = -1;
 	     for(int i =0; i<n; i++)
 	     {
             if(arr[i]> large)
             {
+                Slarge = large;
                 large = arr[i];
             }
-        }
-        for(int i=0; i<n; i++)
-        {
-            if(arr[i]> Slargest  && arr[i] != large)
-            {
-              Slargest =  arr[i];
+            
+            else if(arr[i]<large  && arr[i]> Slarge){
+                Slarge = arr[i];
             }
+          
         }
-        return Slargest;
+       
+        return Slarge;
 	}
 };
 
