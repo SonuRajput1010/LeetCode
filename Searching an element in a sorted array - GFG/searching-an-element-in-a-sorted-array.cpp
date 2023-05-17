@@ -10,17 +10,38 @@ class Solution{
     // arr: input array
     // N: size of array
     // K: element to be searche
-    int searchInSorted(int arr[], int N, int K) 
+    int searchInSorted(int arr[], int N, int k) 
     { 
     
-       // Your code here
-       for(int i=0;i<N;i++){
-           if(arr[i] == K){
-               return 1;
-           }
-       }
-       return -1;
+       // Brute Force
        
+    //   for(int i=0;i<N;i++){
+    //       if(arr[i] == K){
+    //           return 1;
+    //       }
+    //   }
+    //   return -1;
+    
+    // optimal approach
+    int s=0;
+    int e=N-1;
+    
+    
+    while(s<=e)
+    {
+        int mid = (s+e)/2;
+        if(arr[mid] == k){
+            return 1;
+        }
+        else if(arr[mid]>k){
+            e = mid-1;
+        }
+        else{
+            s= mid+1;
+        }
+       
+    }
+    return -1;
     }
 };
 
