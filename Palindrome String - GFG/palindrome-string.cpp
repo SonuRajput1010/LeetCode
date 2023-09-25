@@ -20,20 +20,16 @@ public:
 	    
 	    while(start <= end){
 	        
-	        if(S[start++] == S[end--]){
-	            ans = 1;
-	        }
-	        else
+	        if(S[start++] != S[end--]){
 	            return 0;
-	        
-	    }
-	    if(ans == true){
+	        }
+	    } 
 	        return 1;
-	    }
 	   
 	}
 
 };
+
 
 //{ Driver Code Starts.
 
