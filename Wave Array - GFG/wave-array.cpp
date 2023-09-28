@@ -14,12 +14,8 @@ class Solution{
         
         // Your code here
         
-        int i=0;
-        int j=1;
-        while(i<n && j!=n){
-            swap(arr[i],arr[j]);
-            i = i+2;
-            j = j+2;
+        for(int i=0; i<n-1; i = i+2){
+            swap(arr[i],arr[i+1]);
         }
         
     }
