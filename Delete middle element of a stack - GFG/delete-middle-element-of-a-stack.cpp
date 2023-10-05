@@ -14,20 +14,19 @@ class Solution
     void deleteMid(stack<int>&s, int sizeOfStack)
     {
         // code here.. 
-        stack<int>temp;
-        int pos = sizeOfStack -(sizeOfStack+1)/2; 
+        int n = sizeOfStack - (sizeOfStack+1)/2;
         
-        for(int i=0; i<pos; i++){
+        stack<int>temp;
+        
+        for(int i=0; i<n; i++){
             temp.push(s.top());
             s.pop();
         }
         s.pop();
-        
-        for(int i=0;i<pos;i++){
+        for(int i=0; i<n; i++){
             s.push(temp.top());
             temp.pop();
         }
-        
     }
 };
 
