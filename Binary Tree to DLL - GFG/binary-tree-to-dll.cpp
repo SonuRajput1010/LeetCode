@@ -115,34 +115,60 @@ class Solution
 {
     public: 
     // Function to convert binary tree to doubly linked list and return it.
-    
-    void inorder(Node* root,vector<int>&ans){
-        if(root == NULL){
-            return;
-        }
-        inorder(root->left,ans);
-        ans.push_back(root->data);
-        inorder(root->right,ans);
-    }
+   Node* prev = NULL;
     Node * bToDLL(Node *root)
     {
         // your code here
-        vector<int>ans;
-        inorder(root,ans);
-        
-        Node* head = new Node(ans[0]);
-        Node* curr = head;
-        
-        int n = ans.size();
-        for(int i=1; i<n; i++){
-            Node* temp = new Node(ans[i]);
-            curr->right = temp;
-            temp->left = curr;
-            curr = curr->right;
-        }
-        return head;
+       if(root == NULL){
+           return root;
+       }
+       Node* head = bToDLL(root->left);
+       if(prev == NULL){
+           head = root;
+       }
+      else{
+          root->left = prev;
+          prev->right = root;
+      }
+      prev = root;
+      bToDLL(root->right);
+      return head;
     }
+       
 };
+
+    // time complexity O(N) and space complexity O(H);
+// class Solution
+// {
+//     public: 
+//     // Function to convert binary tree to doubly linked list and return it.
+//     void inorder(Node* root,vector<int>&ans){
+//         if(root == NULL){
+//             return;
+//         }
+//         inorder(root->left,ans);
+//         ans.push_back(root->data);
+//         inorder(root->right,ans);
+//     }
+//     Node * bToDLL(Node *root)
+//     {
+//         // your code here
+//         vector<int>ans;
+//         inorder(root,ans);
+        
+//         Node* head = new Node(ans[0]);
+//         Node* curr = head;
+        
+//         int n = ans.size();
+//         for(int i=1; i<n; i++){
+//             Node* temp = new Node(ans[i]);
+//             curr->right = temp;
+//             temp->left = curr;
+//             curr = curr->right;
+//         }
+//         return head;
+//     }
+// };
 
 
 
