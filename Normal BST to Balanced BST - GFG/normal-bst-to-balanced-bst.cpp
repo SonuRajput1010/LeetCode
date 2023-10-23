@@ -28,44 +28,43 @@ struct Node
 class Solution{
     
     public:
-    // Your are required to complete this function
-    // function should return root of the modified BST
-    
-    
-    // Get the inorder from the unbalanced BST.
-    void inorder(Node* root, vector<int>&ans){
+    void inOrder( Node* root, vector<int> &in){
         if(root == NULL){
-            return ;
+            return;
         }
-        inorder(root->left,ans);
-        ans.push_back(root->data);
-        inorder(root->right,ans);
+        inOrder(root->left,in);
+        in.push_back(root->data);
+        inOrder(root->right,in);
     }
-    
-    // Once obtained, the root node will always be the middle element in the BST.
-    // Apply this logic to construct the left and right subtrees as well.
-    Node* construct_Tree(vector<int>ans,int l,int r){
+    Node* inOrderToBST(int s, int e, vector<int>&in){
         
-        if(l>r){
+        if(s>e){
             return NULL;
         }
-        int mid = l+(r-l)/2;
-        int data = ans[mid];
-        Node* root = new Node(data);
-        root->left = construct_Tree(ans,l,mid-1);
-        root->right = construct_Tree(ans,mid+1,r);
         
-        return root;
+            int mid = (s+e)/2;
+            
+            Node* temp = new Node(in[mid]);
+            
+            temp->left = inOrderToBST(s,mid-1,in);
+            temp->right = inOrderToBST(mid+1,e,in);
+        
+        return temp;
+            
     }
-    
+    // Your are required to complete this function
+    // function should return root of the modified BST
     Node* buildBalancedTree(Node* root)
     {
     	// Code here
-    	vector<int> result;
-    	inorder(root,result);
-    	int n = result.size();
+    	if(root == NULL) return NULL; 
     	
-    	return construct_Tree(result,0,n-1);
+    	vector<int> in;
+        inOrder(root,in);
+        
+        int n = in.size()-1;
+        
+        return inOrderToBST(0,n,in);
     }
 };
 
