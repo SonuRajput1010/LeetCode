@@ -5,18 +5,17 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 public:
-    int fib(int N){
+    int fib(int n){
         //code here
-        int nextTerm, t1 = 0, t2 = 1;
-        if (N <= 1){
-            return N;
+        if(n==0) return 0;
+        if(n==1) return 1;
+        if(n==2) return 1;
+        int a=1,b=1,c;
+        for(int i=3;i<=n;i++){
+            c=(a+b)%10;
+            a=b; b=c;
         }
-        for (int i = 1; i < N; i++){
-            nextTerm = (t1 + t2)%10;
-            t1 = t2;
-            t2 = nextTerm;
-        }
-        return nextTerm % 10;
+        return c;
     }
 };
 
