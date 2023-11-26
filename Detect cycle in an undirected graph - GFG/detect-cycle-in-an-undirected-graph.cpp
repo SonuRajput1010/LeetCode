@@ -5,24 +5,17 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   private:
-    bool detect(int src ,vector<int>adj[], int vis[]){
-        vis[src] = true;
-        queue<pair<int,int>>q;
-        q.push({src,-1});
+    bool detect(vector<int> adj[],int vis[],int node,int parent){
+        vis[node]=1;
         
-        while(!q.empty()){
-            int node = q.front().first;
-            int parent = q.front().second;
-            q.pop();
-            for(auto adjNode : adj[node]){
-                if(!vis[adjNode]){
-                    vis[adjNode] = 1;
-                    q.push({adjNode,node});
-                }
-                else if(parent != adjNode){
-                    return true;
-                }
+        for(auto adjNode:adj[node]){
+            if(!vis[adjNode]){
+                if(detect(adj,vis,adjNode,node)) return true;
             }
+            else if(parent != adjNode){
+                return true;
+            }
+            
         }
         return false;
     }
@@ -30,18 +23,54 @@ class Solution {
     // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
-        int vis[V] = {0};
-        
-        for(int i=0; i<V; i++){
+       int vis[V]={0};
+        // vis[0]=1;
+        for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(detect(i,adj,vis)){
-                    return true;
-                }
+                if(detect(adj,vis,i,-1)) return true;
             }
         }
         return false;
     }
 };
+
+// private:
+//     bool detect(int src ,vector<int>adj[], int vis[]){
+//         vis[src] = true;
+//         queue<pair<int,int>>q;
+//         q.push({src,-1});
+        
+//         while(!q.empty()){
+//             int node = q.front().first;
+//             int parent = q.front().second;
+//             q.pop();
+//             for(auto adjNode : adj[node]){
+//                 if(!vis[adjNode]){
+//                     vis[adjNode] = 1;
+//                     q.push({adjNode,node});
+//                 }
+//                 else if(parent != adjNode){
+//                     return true;
+//                 }
+//             }
+//         }
+//         return false;
+//     }
+//   public:
+//     // Function to detect cycle in an undirected graph.
+//     bool isCycle(int V, vector<int> adj[]) {
+//         // Code here
+//         int vis[V] = {0};
+        
+//         for(int i=0; i<V; i++){
+//             if(!vis[i]){
+//                 if(detect(i,adj,vis)){
+//                     return true;
+//                 }
+//             }
+//         }
+//         return false;
+// }
 
 //{ Driver Code Starts.
 int main() {
