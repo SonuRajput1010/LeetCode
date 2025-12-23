@@ -1,5 +1,5 @@
 class Solution {
-    public int squareSum(int n){
+    public int getSum(int n){
         int sum =0;
         while(n > 0){
             int d = n%10;
@@ -10,19 +10,15 @@ class Solution {
     }
     public boolean isHappy(int n) {
 
-        int slow = n;
-        int fast = n;
+       HashSet<Integer> seen = new HashSet<>();
+       while(n != 1){
+        if(seen.contains(n)) return false; // cycle detected
 
-        while(true){
-            slow = squareSum(slow);
+            seen.add(n);
+            n = getSum(n);
+       }
+       return true;
 
-            fast = squareSum(fast);
-            fast = squareSum(fast);
-
-            if(fast == 1) return true;
-            if(slow == fast ) return false; // cycle 
-
-        }
         
     }
 }
