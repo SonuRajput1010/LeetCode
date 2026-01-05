@@ -15,45 +15,46 @@ class Node {
 
 class Solution {
     public Node copyRandomList(Node head) {
-        if(head == null) return head;
 
-        Map<Node, Node> map = new HashMap<>();
-
+        if(head == null) return null;
         Node curr = head;
-        Node prev = null;
-        Node newHead = null;
 
+        // 3 Steps
+        // Insert new Node;
         while(curr != null){
-            Node temp = new Node(curr.val);
 
-           map.put(curr, temp);
+            Node currNext = curr.next; // B
+            curr.next = new Node(curr.val); // A->x
+            curr.next.next = currNext; //  A->x->B
+            curr = currNext;  // A->B
 
-
-            if(newHead == null){
-                newHead = temp;
-                prev = newHead;
-            }else{
-                prev.next = temp;
-                prev = temp;
-            }
-            curr = curr.next;
         }
 
+        // Random pointer;
         curr = head;
-        Node newCurr = newHead;
-
-        while(curr != null){
+        while(curr != null && curr.next != null){
             if(curr.random == null){
-                newCurr.random = null;
+                curr.next.random = null;
             }
-            else{
-                newCurr.random = map.get(curr.random);
-            }
+            else {
+                curr.next.random = curr.random.next;
+            } 
+            curr = curr.next.next;
+        }
+
+        // Separate both linked list;
+
+        Node newHead = head.next;
+        Node newCurr = newHead;
+        curr = head;
+
+        while(newHead != null && newCurr != null){
+            curr.next = curr.next == null ? null : curr.next.next;
+            newCurr.next = newCurr.next == null ? null : newCurr.next.next;
+
             curr = curr.next;
             newCurr = newCurr.next;
         }
-
         return newHead;
-
     }
 }
