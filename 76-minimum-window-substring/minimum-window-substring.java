@@ -13,29 +13,37 @@ class Solution {
         int count = t.length();
         int minLen = Integer.MAX_VALUE;
 
-        for(int r=0; r<s.length(); r++){
+        for (int r = 0; r < s.length(); r++) {
+
             char ch = s.charAt(r);
 
-            if(tMap.containsKey(ch)){
-                if(tMap.get(ch) > 0){
+            if (tMap.containsKey(ch)) {
+
+                if (tMap.get(ch) > 0) {
                     count--;
                 }
-                tMap.put(ch,tMap.get(ch)-1);
+
+                tMap.put(ch, tMap.get(ch) - 1);
             }
 
-            while(count == 0){
-                if(r-l+1 < minLen){
-                    minLen = r-l+1;
-                    ans = s.substring(l,r+1);
+            while (count == 0) {
+
+                if (r - l + 1 < minLen) {
+                    minLen = r - l + 1;
+                    ans = s.substring(l, r + 1);
                 }
+
                 char leftCh = s.charAt(l);
 
-                if(tMap.containsKey(leftCh)){
-                    tMap.put(leftCh,tMap.get(leftCh)+1);
-                    if(tMap.get(leftCh) > 0){
-                    count++;
+                if (tMap.containsKey(leftCh)) {
+
+                    tMap.put(leftCh, tMap.get(leftCh) + 1);
+
+                    if (tMap.get(leftCh) > 0) {
+                        count++;
                     }
                 }
+
                 l++;
             }
         }
