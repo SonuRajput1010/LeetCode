@@ -27,7 +27,7 @@ class MyQueue {
     }
     
     public boolean empty() {
-        return st1.size() == 0;
+        return st1.isEmpty();
     }
 }
 
